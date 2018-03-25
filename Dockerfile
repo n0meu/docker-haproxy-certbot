@@ -1,12 +1,12 @@
 # haproxy1.8.4 with certbot
 FROM ubuntu:xenial
 
-RUN apt-get update && apt-get install -y libssl1.0.2 libpcre3 --no-install-recommends && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y libssl1.0.2 libpcre3 liblua5.3-0 lua5.3 --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 # Setup HAProxy
 ENV HAPROXY_MAJOR 1.8
 ENV HAPROXY_VERSION 1.8.4
-RUN buildDeps='curl gcc libc6-dev libpcre3-dev libssl-dev make' \
+RUN buildDeps='curl gcc libc6-dev libpcre3-dev libssl-dev liblua5.3-dev make' \
   && set -x \
   && apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
   && curl -SL "http://www.haproxy.org/download/${HAPROXY_MAJOR}/src/haproxy-${HAPROXY_VERSION}.tar.gz" -o haproxy.tar.gz \
@@ -18,6 +18,7 @@ RUN buildDeps='curl gcc libc6-dev libpcre3-dev libssl-dev make' \
     USE_PCRE=1 PCREDIR= \
     USE_OPENSSL=1 \
     USE_ZLIB=1 \
+    USE_LUA=1 \
     all \
     install-bin \
   && mkdir -p /config \
