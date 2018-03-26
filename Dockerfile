@@ -28,7 +28,7 @@ RUN buildDeps='curl gcc libc6-dev libpcre3-dev libssl-dev liblua5.3-dev make' \
   && apt-get purge -y --auto-remove $buildDeps
 
 # Install Supervisor, cron, libnl-utils, net-tools, iptables
-RUN apt-get update && apt-get install -y supervisor cron libnl-utils net-tools iptables && \
+RUN apt-get update && apt-get install -y supervisor cron libnl-utils iproute2 net-tools iptables && \
   apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Setup Supervisor
