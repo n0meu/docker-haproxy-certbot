@@ -1,11 +1,11 @@
-# haproxy1.8.7 with certbot
+# haproxy1.8.8 with certbot
 FROM ubuntu:xenial
 
 RUN apt-get update && apt-get install -y libssl1.0.2 libpcre3 liblua5.3-0 lua5.3 --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 # Setup HAProxy
 ENV HAPROXY_MAJOR 1.8
-ENV HAPROXY_VERSION 1.8.7
+ENV HAPROXY_VERSION 1.8.8
 RUN buildDeps='curl gcc libc6-dev libpcre3-dev libssl-dev liblua5.3-dev make' \
   && set -x \
   && apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
